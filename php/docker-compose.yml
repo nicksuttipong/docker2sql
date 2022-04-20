@@ -1,0 +1,23 @@
+version: "2"
+
+services:
+  
+  workspace:
+    build: "./.docker"
+    restart: always
+    ports:
+      - "8084:80"
+      - "443:443"
+    volumes:
+      ##PHP INI 
+      - ".docker/php.ini:/usr/local/etc/php/conf.d/php.ini"
+      - ".docker/ssl:/etc/apache2/ssl/"
+      - ".docker/conf.d:/etc/apache2/sites-enabled"
+
+      ## STORAGE DATA
+      - "./:/var/www/html"
+    networks:
+       - ggg-network
+
+networks:
+  ggg-network:
